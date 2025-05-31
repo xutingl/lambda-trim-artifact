@@ -1,0 +1,9 @@
+
+[submodule "serverless-bench"]
+	path = serverless-bench
+	url = https://github.com/spyrospav/serverless-bench.git
+	branch = main
+[submodule "lambda-trim"]
+	path = lambda-trim
+	url = https://github.com/eniac/lambda-trim.git
+	branch = ae

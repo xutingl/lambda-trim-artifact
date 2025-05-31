@@ -169,3 +169,13 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+aws/
+
+*.txt
+
+azurefunctions-dataset2019/
+
+.DS_Store
+
+ltrim-venv/
