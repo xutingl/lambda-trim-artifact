@@ -37,8 +37,9 @@ aws configure
 ```
 
 ### Simple Example
+Debloat a small application, jsym, with a small k (number of modules to debloat).
 ```shell
-python main.py jsym
+python main.py jsym -k 1
 ```
 
 ## Reproduce experiments

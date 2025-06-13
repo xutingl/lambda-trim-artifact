@@ -21,8 +21,12 @@ COPY serverless-bench/examples/${APPNAME}/ ${LAMBDA_TASK_ROOT}/
 
 RUN yum install -y git
 
-
-RUN pip install ltrim
+# Install ltrim
+ARG LTRIM_PATH=${LAMBDA_TASK_ROOT}/lambda-trim
+COPY lambda-trim ${LAMBDA_TASK_ROOT}/lambda-trim
+RUN cd $LTRIM_PATH && \
+    pip install -e . &&\
+    cd ~
 
 # Specific installations for image-resize
 RUN if [ "${APPNAME}" = "image-resize" ]; then \
