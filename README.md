@@ -61,7 +61,10 @@ python main.py jsym -k 1
    python experiments/debloating.py --action run-baseline
    ```
    Results will be stored in `experiments/debloat/results/baseline`.
-3. Created debloated Lambda functions by running
+3. Created debloated Lambda functions.
+   First, copy your AWS credentials to the corresponding fields (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY) in [experiments/debloat.py](./experiments/debloat.py). This is required to debloat applications that uses AWS services (i.e. boto3).
+
+   Then, run
    ```shell
    python experiments/debloating.py --action create-debloat
    ```

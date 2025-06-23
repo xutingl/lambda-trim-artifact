@@ -10,6 +10,12 @@ ARG WITH_FALLBACK="False"
 
 ARG FALLBACK_FUNCTION_NAME=${APPNAME}
 
+# Setting AWS credentials for applications that needs boto3
+ARG AWS_ACCESS_KEY_ID=""
+ARG AWS_SECRET_ACCESS_KEY=""
+ENV AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+ENV AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+
 COPY serverless-bench/examples/${APPNAME}/ ${LAMBDA_TASK_ROOT}/
 
 # RUN yum update -y

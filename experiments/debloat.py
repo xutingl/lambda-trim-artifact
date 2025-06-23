@@ -9,6 +9,10 @@ sys.path.append(parent_path)
 from ltrimutil import get_aws_id, info, ok, warn, fail
 from create_baseline import create_new_function
 
+# This is required to debloat applications that use AWS services (i.e. boto3)
+AWS_ACCESS_KEY_ID = "" # Insert your AWS Access Key ID here
+AWS_SECRET_ACCESS_KEY = "" # Insert your AWS Secret Access Key here
+
 def run_command(command: str):
     info(command)
     os.system(command)
@@ -21,7 +25,7 @@ def create_debloat_function(repo_dir, client, app, image_name, function_name, aw
         f"aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin {aws_id}.dkr.ecr.us-east-1.amazonaws.com"
     )
     run_command(
-        f'sudo docker build -f {repo_dir}/docker/lambdatrim.Dockerfile -t {image_name} --build-arg APPNAME={app} --build-arg TOP_K={k} --build-arg SCORING={scoring} --build-arg WITH_FALLBACK="false" {repo_dir}'
+        f'sudo docker build -f {repo_dir}/docker/lambdatrim.Dockerfile -t {image_name} --build-arg APPNAME={app} --build-arg TOP_K={k} --build-arg SCORING={scoring} --build-arg WITH_FALLBACK="false" --build-arg AWS_ACCESS_KEY_ID={AWS_ACCESS_KEY_ID} --build-arg AWS_SECRET_ACCESS_KEY={AWS_SECRET_ACCESS_KEY} {repo_dir}'
     )
     ok(f"Built debloated local image {image_name} for app {app}.")
 
@@ -49,7 +53,7 @@ def create_debloat_function_with_fallback(repo_dir, client, app, image_name, fun
         f"aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin {aws_id}.dkr.ecr.us-east-1.amazonaws.com"
     )
     run_command(
-        f'sudo docker build -f {repo_dir}/docker/lambdatrim.Dockerfile -t {image_name} --build-arg APPNAME={app} --build-arg TOP_K={k} --build-arg SCORING={scoring} --build-arg WITH_FALLBACK="true" --build-arg FALLBACK_FUNCTION_NAME={fallback_function_name} {repo_dir}'
+        f'sudo docker build -f {repo_dir}/docker/lambdatrim.Dockerfile -t {image_name} --build-arg APPNAME={app} --build-arg TOP_K={k} --build-arg SCORING={scoring} --build-arg WITH_FALLBACK="true" --build-arg FALLBACK_FUNCTION_NAME={fallback_function_name} --build-arg AWS_ACCESS_KEY_ID={AWS_ACCESS_KEY_ID} --build-arg AWS_SECRET_ACCESS_KEY={AWS_SECRET_ACCESS_KEY} {repo_dir}'
     )
     ok(f"Built debloated local image {image_name} for app {app}.")
 
