@@ -40,5 +40,9 @@ RUN if [ "${APPNAME}" = "spacy" ]; then \
     python -m spacy download en_core_web_sm; \
     fi
 
+# Specific installations for textblob
+RUN if [ "${APPNAME}" = "textblob" ]; then \
+    python /var/task/install.py; \
+    fi
 
 CMD [ "lambda_function.handler" ]
