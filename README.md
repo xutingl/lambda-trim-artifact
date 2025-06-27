@@ -86,7 +86,7 @@ Use [experiments/debloat/fig8.ipynb](./experiments/debloat/fig8.ipynb) to genera
 To run the experiments for the various scoring methods (memory, time, combined, random), run the following:
 
 ```shell
-./experiments/ablation/run_all.sh
+./experiments/ablation/run_all.sh scoring
 ```
 
 If you want to run a specific application `appname` for the various scoring methods, you can run:
@@ -103,7 +103,7 @@ This step assumes that you have run the debloating experiment (Figure 8) first.
 To run the experiments for varying K (number of modules to debloat), run the following:
 
 ```shell
-./experiments/ablation/run_all.sh
+./experiments/ablation/run_all.sh k
 ```
 
 If you want to run a specific application `appname` for varying K, you can run:
